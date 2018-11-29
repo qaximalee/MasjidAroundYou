@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                //Toast.makeText(MainActivity.this, "Calculating", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Calculating", Toast.LENGTH_SHORT).show();
 
                 adapter = new MasjidAdapter(MainActivity.this, nearestMasajids, masajidDistances);
                 recyclerView.setAdapter(adapter);
