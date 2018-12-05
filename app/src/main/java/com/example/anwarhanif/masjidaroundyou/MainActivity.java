@@ -1,8 +1,6 @@
 package com.example.anwarhanif.masjidaroundyou;
 
 import android.Manifest;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -13,7 +11,6 @@ import android.os.Build;
 import android.os.Looper;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -37,20 +34,13 @@ public class MainActivity extends AppCompatActivity {
     MasjidAdapter adapter;
     private Button mCalculateDistanceBtn;
 
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-
-
-    private LocationManager myManager;
-    private MyLocListener loc = new MyLocListener(MainActivity.this);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mCalculateDistanceBtn = (Button) findViewById(R.id.calculate_btn);
-        recyclerView = (RecyclerView) findViewById(R.id.masjid_name_n_distance);
+        mCalculateDistanceBtn = findViewById(R.id.calculate_btn);
+        recyclerView = findViewById(R.id.masjid_name_n_distance);
 
 
         masajid.add(new MasjidPOJO(1, "Sofia Noorbakhsha", 24.859655, 67.088551, new PrayerTiming("5:36 AM", "12:19 PM", "4:06 PM", "5:42 PM", "7:02 PM")));
@@ -136,6 +126,9 @@ public class MainActivity extends AppCompatActivity {
     public void getLocations(){
         Log.w("MainActivity", "getLocations()");
 
+        LocationManager locationManager;
+        LocationListener locationListener;
+
         Criteria criteria = new Criteria();
         criteria.setAccuracy(Criteria.ACCURACY_COARSE);
         criteria.setPowerRequirement(Criteria.POWER_LOW);
@@ -182,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
                 requestPermissions(new String[]{
                         android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.INTERNET
                 }, 10);
-                return;
             }
         }else{
             Log.w("MainActivity", "if permission are correct");
